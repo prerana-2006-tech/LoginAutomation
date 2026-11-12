@@ -1,0 +1,21 @@
+
+name: Selenium Login Automation
+
+on: [push]
+
+jobs:
+  selenium-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+
+      - name: Run Selenium Tests
+        run: mvn clean test
