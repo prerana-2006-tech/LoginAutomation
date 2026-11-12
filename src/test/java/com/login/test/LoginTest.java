@@ -20,19 +20,28 @@ public class LoginTest {
 
     WebDriver driver;
 
-    @BeforeMethod
-    public void setup() {
 
-        ChromeOptions options = new ChromeOptions();
+@BeforeMethod
+public void setup() {
 
-        driver = new ChromeDriver(options);
+    ChromeOptions options = new ChromeOptions();
 
-        String filePath = Path.of(
-            "src/main/resources/login.html"
-        ).toAbsolutePath().toUri().toString();
+    // Run Chrome without opening a visible window
+    options.addArguments("--headless=new");
 
-        driver.get(filePath);
-    }
+    // Required for GitHub Actions
+    options.addArguments("--no-sandbox");
+
+    options.addArguments("--disable-dev-shm-usage");
+
+    driver = new ChromeDriver(options);
+
+    String filePath = Path.of(
+        "src/main/resources/login.html"
+    ).toAbsolutePath().toUri().toString();
+
+    driver.get(filePath);
+}
 
     @Test
     public void validLoginTest() {
