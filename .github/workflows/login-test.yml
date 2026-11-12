@@ -1,0 +1,24 @@
+
+name: Login Automation
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  login-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get project code
+        uses: actions/checkout@v4
+
+      - name: Install Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: maven
+
+      - name: Run Selenium tests
+        run: mvn clean test
